@@ -4,8 +4,9 @@ namespace App\Model;
 
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class User
+class User implements UserInterface
 {
     #[NotBlank]
     protected string $name;
@@ -47,5 +48,19 @@ class User
     {
         $this->phone = $phone;
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER', 'ROLE_ADMIN'];
+    }
+
+    public function eraseCredentials(): void
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }
