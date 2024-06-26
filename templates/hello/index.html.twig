@@ -1,5 +1,12 @@
 {%  extends 'base.html.twig' %}
 
 {% block body %}
-<h2>Hello, {{ name }}!</h2>
+    <h2>Hello, {{ name }}!</h2>
+
+    {% if message is not empty %}
+        {{ message }}
+    {% endif %}
+
+    {{ form(form, {'method': 'POST'}) }}
+    {{ form_end(form) }}
 {% endblock %}
